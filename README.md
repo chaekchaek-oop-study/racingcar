@@ -30,6 +30,43 @@ Java, Kotlin, JavaScript는 표현 방식과 관용구가 다르지만 다음과
 4. 언어와 관계없이 전원이 서로의 코드를 리뷰합니다.
 5. 리뷰에서 나눈 고민과 설계의 변화를 코드와 Pull Request에 남깁니다.
 
+## 참여 시작하기
+
+Git은 디렉터리가 아니라 저장소 단위로 clone합니다. 따라서 전체 저장소를 받은 뒤, 사용할 언어의 `base` 디렉터리 내용을 자신의 닉네임 디렉터리로 복사합니다.
+
+아래 명령의 `{언어}`, `{GitHub아이디}`, `{닉네임}`은 자신에게 맞는 값으로 바꿉니다.
+
+```bash
+git clone https://github.com/chaekchaek-oop-study/racingcar.git
+cd racingcar
+
+git switch -c {언어}/{GitHub아이디}/dev
+# 예시: git switch -c java/rudevico/dev
+
+cp -R base/{언어}/. '{닉네임}/'
+# 예시: cp -R base/java/. '루드비코/'
+
+git rm '{닉네임}/.gitkeep'
+# 예시: git rm '루드비코/.gitkeep'
+
+git add '{닉네임}'
+# 예시: git add '루드비코'
+
+git commit -m "chore: {닉네임} {언어} 베이스 코드 설정"
+# 예시: git commit -m "chore: 루드비코 Java 베이스 코드 설정"
+
+git push -u origin {언어}/{GitHub아이디}/dev
+# 예시: git push -u origin java/rudevico/dev
+```
+
+| 사용 언어 | 복사할 디렉터리 |
+| --- | --- |
+| Java | `base/java/` |
+| Kotlin | `base/kotlin/` |
+| JavaScript | `base/javascript/` |
+
+`base/` 아래의 원본 코드는 직접 수정하지 않습니다. 각자의 작업은 닉네임 디렉터리 안에서 진행하고, `main` 브랜치로 Pull Request를 엽니다.
+
 ## 디렉터리 구조
 
 `base/`에는 각 언어의 프리코스 원본 코드를 기준 상태로 보존합니다. 이 코드는 직접 수정하지 않으며, 각 구성원은 자신의 닉네임 디렉터리에 필요한 베이스 코드를 가져와 독립적으로 구현합니다.
