@@ -33,13 +33,25 @@ public class RacingCarController {
     }
 
     private List<String> parseCarName() {
-        String names = InputView.inputCarNames();
-        return Parser.parseCarName(names);
+        while (true) {
+            try {
+                String names = InputView.inputCarNames();
+                return Parser.parseCarName(names);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     private int parseRacingCount() {
-        String count = InputView.inputRacingCount();
-        return Parser.parseRacingCount(count);
+        while (true) {
+            try {
+                String count = InputView.inputRacingCount();
+                return Parser.parseRacingCount(count);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     private List<Car> prepareCars(List<String> carNames) {
