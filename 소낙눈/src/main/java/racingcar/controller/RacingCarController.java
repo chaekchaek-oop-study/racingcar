@@ -15,11 +15,8 @@ public class RacingCarController {
     private final NumberGenerator randomNumberGenerator = new RandomNumberGenerator();
 
     public void run() {
-        String names = InputView.inputCarNames();
-        List<String> carNames = Parser.parseCarName(names);
-
-        String count = InputView.inputRacingCount();
-        int racingCount = Parser.parseRacingCount(count);
+        List<String> carNames = parseCarName();
+        int racingCount = parseRacingCount();
 
         List<Car> cars = new ArrayList<>();
         for (String carName : carNames) {
@@ -42,5 +39,15 @@ public class RacingCarController {
         List<String> winners = WinnerDecisionMaker.decideWinner(cars);
 
         OutputView.outputWinner(winners);
+    }
+
+    private List<String> parseCarName() {
+        String names = InputView.inputCarNames();
+        return Parser.parseCarName(names);
+    }
+
+    private int parseRacingCount() {
+        String count = InputView.inputRacingCount();
+        return Parser.parseRacingCount(count);
     }
 }
