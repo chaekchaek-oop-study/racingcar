@@ -16,13 +16,13 @@ public class Car {
 
     private void validateNameExceedingFive(String name) {
         if (name.length() > 5) {
-            throw new IllegalArgumentException("[ERROR] 이름은 5자를 초과할 수 없습니다.");
+            throw new IllegalArgumentException("[ERROR] 자동차 이름은 5자를 초과할 수 없습니다.");
         }
     }
 
     private void validateNameLessThanOne(String name) {
         if (name.isEmpty()) {
-            throw new IllegalArgumentException("[ERROR] 이름은 1글자 이상이어야 합니다.");
+            throw new IllegalArgumentException("[ERROR] 자동차 이름은 공백일 수 없습니다.");
         }
     }
 

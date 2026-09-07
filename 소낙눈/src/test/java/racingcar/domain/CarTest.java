@@ -8,17 +8,17 @@ import org.junit.jupiter.api.Test;
 public class CarTest {
 
     @Test
-    void 이름이_5글자를_초과하면_에러가_발생한다() {
+    void 자동차_이름이_5글자를_초과하면_에러가_발생한다() {
         assertThatThrownBy(() -> new Car("snowshower"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] 이름은 5자를 초과할 수 없습니다.");
+                .hasMessage("[ERROR] 자동차 이름은 5자를 초과할 수 없습니다.");
     }
 
     @Test
-    void 이름이_1글자_미만이면_에러가_발생한다() {
+    void 자동차_이름이_공백이면_에러가_발생한다() {
         assertThatThrownBy(() -> new Car(""))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] 이름은 1글자 이상이어야 합니다.");
+                .hasMessage("[ERROR] 자동차 이름은 공백일 수 없습니다.");
     }
 
     @Test
