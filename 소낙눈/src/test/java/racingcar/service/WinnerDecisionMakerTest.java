@@ -14,9 +14,9 @@ public class WinnerDecisionMakerTest {
         Car car1 = new Car("snow");
         Car car2 = new Car("ao");
         Car car3 = new Car("ruvi");
-        car1.setPosition(5);
-        car2.setPosition(3);
-        car3.setPosition(3);
+        car1.forward(5);
+        car2.forward(3);
+        car3.forward(3);
 
         List<Car> cars = List.of(car1, car2, car3);
         String winner = "snow";
@@ -31,9 +31,9 @@ public class WinnerDecisionMakerTest {
         Car car1 = new Car("snow");
         Car car2 = new Car("ao");
         Car car3 = new Car("ruvi");
-        car1.setPosition(5);
-        car2.setPosition(5);
-        car3.setPosition(3);
+        car1.forward(5);
+        car2.forward(5);
+        car3.forward(3);
 
         List<Car> cars = List.of(car1, car2, car3);
         List<String> winners = List.of("snow", "ao");
