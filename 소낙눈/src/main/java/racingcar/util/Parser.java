@@ -9,13 +9,16 @@ public class Parser {
     private static final String RACING_COUNT_BLANK_ERROR_MESSAGE = "[ERROR] 시도 횟수는 공백일 수 없습니다.";
     private static final String RACING_COUNT_IS_NOT_NUMBER_ERROR_MESSAGE = "[ERROR] 시도 횟수는 숫자여야 합니다.";
     private static final String RACING_COUNT_IS_NOT_POSITIVE_ERROR_MESSAGE = "[ERROR] 시도 횟수는 양수여야 합니다.";
+    private static final String SPLIT_REGEX = ",";
+    private static final int MAX_CAR_NAME_LENGTH = 5;
+    private static final int MIN_RACING_COUNT = 1;
 
     public static List<String> parseCarName(String names) {
         validateNameIsNullOrBlank(names);
-        List<String> carNames = Arrays.asList(names.split(","));
+        List<String> carNames = Arrays.asList(names.split(SPLIT_REGEX));
         validateCarNameIsNullOrBlank(carNames);
         validateCarNameIsLessThanZeroOrExceedingFive(carNames);
-        return Arrays.asList(names.split(","));
+        return Arrays.asList(names.split(SPLIT_REGEX));
     }
 
     public static int parseRacingCount(String count) {
@@ -44,7 +47,7 @@ public class Parser {
     }
 
     private static void validateNameExceedingFive(String name) {
-        if (name.length() > 5) {
+        if (name.length() > MAX_CAR_NAME_LENGTH) {
             throw new IllegalArgumentException(CAR_NAME_EXCEEDING_FIVE_ERROR_MESSAGE);
         }
     }
@@ -64,7 +67,7 @@ public class Parser {
     }
 
     private static void validateRacingCountIsPositive(int racingCount) {
-        if (racingCount < 1) {
+        if (racingCount < MIN_RACING_COUNT) {
             throw new IllegalArgumentException(RACING_COUNT_IS_NOT_POSITIVE_ERROR_MESSAGE);
         }
     }

@@ -1,6 +1,10 @@
 package racingcar.domain;
 
 public class Car {
+    private static final String CAR_NAME_BLANK_ERROR_MESSAGE = "[ERROR] 자동차 이름은 공백일 수 없습니다.";
+    private static final String CAR_NAME_EXCEEDING_FIVE_ERROR_MESSAGE = "[ERROR] 자동차 이름은 5자를 초과할 수 없습니다.";
+    private static final int MAX_CAR_NAME_LENGTH = 5;
+
     private final String name;
     private int position = 0;
 
@@ -14,15 +18,15 @@ public class Car {
         validateNameLessThanOne(name);
     }
 
-    private void validateNameExceedingFive(String name) {
-        if (name.length() > 5) {
-            throw new IllegalArgumentException("[ERROR] 자동차 이름은 5자를 초과할 수 없습니다.");
+    private void validateNameLessThanOne(String name) {
+        if (name.isEmpty()) {
+            throw new IllegalArgumentException(CAR_NAME_BLANK_ERROR_MESSAGE);
         }
     }
 
-    private void validateNameLessThanOne(String name) {
-        if (name.isEmpty()) {
-            throw new IllegalArgumentException("[ERROR] 자동차 이름은 공백일 수 없습니다.");
+    private void validateNameExceedingFive(String name) {
+        if (name.length() > MAX_CAR_NAME_LENGTH) {
+            throw new IllegalArgumentException(CAR_NAME_EXCEEDING_FIVE_ERROR_MESSAGE);
         }
     }
 
