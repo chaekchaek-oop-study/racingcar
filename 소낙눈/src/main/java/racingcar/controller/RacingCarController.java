@@ -18,21 +18,12 @@ public class RacingCarController {
         List<String> carNames = parseCarName();
         int racingCount = parseRacingCount();
 
-        List<Car> cars = new ArrayList<>();
-        for (String carName : carNames) {
-            Car car = new Car(carName);
-            cars.add(car);
-        }
+        List<Car> cars = prepareCars(carNames);
 
         OutputView.outputRacingResultMessage();
 
         for (int i = 0; i < racingCount; i++) {
-            for (Car car : cars) {
-                int randomNumber = randomNumberGenerator.generate();
-                if (ForwardDecisionMaker.isForward(randomNumber)) {
-                    car.setPosition(car.getPosition() + 1);
-                }
-            }
+            forwardCar(cars);
             OutputView.outputCurrentRacingStatus(cars);
         }
 
@@ -49,5 +40,28 @@ public class RacingCarController {
     private int parseRacingCount() {
         String count = InputView.inputRacingCount();
         return Parser.parseRacingCount(count);
+    }
+
+    private List<Car> prepareCars(List<String> carNames) {
+        List<Car> cars = new ArrayList<>();
+        for (String carName : carNames) {
+            Car car = new Car(carName);
+            cars.add(car);
+        }
+
+        return cars;
+    }
+
+    private void forwardCar(List<Car> cars) {
+        for (Car car : cars) {
+            int randomNumber = randomNumberGenerator.generate();
+            if (isForward(randomNumber)) {
+                car.forward(car.getPosition() + 1);
+            }
+        }
+    }
+
+    private boolean isForward(int randomNumber) {
+        return ForwardDecisionMaker.isForward(randomNumber);
     }
 }
