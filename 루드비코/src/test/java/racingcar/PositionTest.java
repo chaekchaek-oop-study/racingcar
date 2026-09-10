@@ -26,9 +26,9 @@ class PositionTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("전진의 단위는 1이다")
+    @DisplayName("위치값 증가의 단위는 1이다")
     @Test
-    void 전진에_성공한다() {
+    void 위치값_증가에_성공한다() {
         Position position = new Position(3);
 
         Position increased = position.increase();
