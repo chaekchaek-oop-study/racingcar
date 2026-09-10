@@ -3,15 +3,16 @@ package racingcar.controller;
 import java.util.Arrays;
 import java.util.List;
 import racingcar.domain.Car;
-import racingcar.service.CarService;
+import racingcar.service.RacingCarService;
 import racingcar.view.InputView;
+import racingcar.view.OutputView;
 
-public class CarController {
+public class RacingCarController {
 
     private final InputView inputView;
-    private final CarService carService;
+    private final RacingCarService carService;
 
-    public CarController(InputView inputView, CarService carService) {
+    public RacingCarController(InputView inputView, OutputView outputView, RacingCarService carService) {
         this.inputView = inputView;
         this.carService = carService;
     }
