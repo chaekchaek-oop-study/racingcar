@@ -31,5 +31,6 @@ public class CarController {
         }
         List<Car> cars = carService.createCars(carNames);
 
+        String inputTryCount = inputView.inputTryCount();
     }
 }
