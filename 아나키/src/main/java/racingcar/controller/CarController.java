@@ -21,5 +21,13 @@ public class CarController {
         List<String> carNames =  Arrays.stream(inputCarNames.split(","))
                 .map(String::trim)
                 .toList();
+        for (String carName : carNames) {
+            if (carName.isBlank()){
+                throw new IllegalArgumentException("자동차 이름은 공백일 수 없습니다.");
+            }
+            if (carName.length() > 5) {
+                throw new IllegalArgumentException("자동차 이름은 5자 이하여야 합니다.");
+            }
+        }
     }
 }
