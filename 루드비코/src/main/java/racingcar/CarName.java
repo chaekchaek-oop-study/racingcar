@@ -2,12 +2,12 @@ package racingcar;
 
 import java.util.Objects;
 
-public record CarName(String value) {
+record CarName(String value) {
 
     private static final int MIN_LENGTH = 1;
     private static final int MAX_LENGTH = 5;
 
-    public CarName {
+    CarName {
         Objects.requireNonNull(value, "이름이 null입니다.");
         validateLength(value);
         validateOnlyAlphabetic(value);
