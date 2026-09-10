@@ -1,5 +1,8 @@
 package racingcar.controller;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import racingcar.service.CarService;
 import racingcar.view.InputView;
 
@@ -14,6 +17,9 @@ public class CarController {
     }
 
     public void run() {
-        String carNames = inputView.inputCarNames();
+        String inputCarNames = inputView.inputCarNames();
+        List<String> carNames =  Arrays.stream(inputCarNames.split(","))
+                .map(String::trim)
+                .toList();
     }
 }
