@@ -1,4 +1,4 @@
-package racingcar;
+package racingcar.move;
 
 public class MovingStrategy {
 
