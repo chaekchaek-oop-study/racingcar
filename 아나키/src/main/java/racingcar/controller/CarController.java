@@ -32,5 +32,14 @@ public class CarController {
         List<Car> cars = carService.createCars(carNames);
 
         String inputTryCount = inputView.inputTryCount();
+        if (inputTryCount.isBlank()) {
+            throw new IllegalArgumentException("시도 횟수는 공백일 수 없습니다.");
+        }
+        int tryCount;
+        try {
+            tryCount = Integer.parseInt(inputTryCount);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("시도 횟수는 숫자만 입력할 수 있습니다.");
+        }
     }
 }
