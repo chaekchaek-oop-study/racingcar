@@ -2,7 +2,7 @@ package racingcar.controller;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
+import racingcar.domain.Car;
 import racingcar.service.CarService;
 import racingcar.view.InputView;
 
@@ -29,5 +29,7 @@ public class CarController {
                 throw new IllegalArgumentException("자동차 이름은 5자 이하여야 합니다.");
             }
         }
+        List<Car> cars = carService.createCars(carNames);
+
     }
 }
