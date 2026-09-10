@@ -51,5 +51,8 @@ public class RacingCarController {
             carService.playRound(cars);
             outputView.printRoundResult(List.copyOf(cars));
         }
+
+        List<String> winnerName = carService.getWinner(cars);
+        outputView.printWinner(winnerName);
     }
 }
