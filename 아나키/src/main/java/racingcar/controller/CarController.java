@@ -41,5 +41,9 @@ public class CarController {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("시도 횟수는 숫자만 입력할 수 있습니다.");
         }
+
+        for (int i = 0; i < tryCount; i++) {
+            carService.playRound(cars);
+        }
     }
 }
