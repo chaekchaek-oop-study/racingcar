@@ -10,10 +10,12 @@ import racingcar.view.OutputView;
 public class RacingCarController {
 
     private final InputView inputView;
+    private final OutputView outputView;
     private final RacingCarService carService;
 
     public RacingCarController(InputView inputView, OutputView outputView, RacingCarService carService) {
         this.inputView = inputView;
+        this.outputView = outputView;
         this.carService = carService;
     }
 
@@ -43,8 +45,11 @@ public class RacingCarController {
             throw new IllegalArgumentException("시도 횟수는 숫자만 입력할 수 있습니다.");
         }
 
+        outputView.printResult();
+
         for (int i = 0; i < tryCount; i++) {
             carService.playRound(cars);
+            outputView.printRoundResult(List.copyOf(cars));
         }
     }
 }
