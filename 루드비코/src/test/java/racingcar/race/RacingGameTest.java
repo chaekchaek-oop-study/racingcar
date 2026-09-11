@@ -30,19 +30,17 @@ class RacingGameTest {
     @Test
     void 한_라운드에서_각_자동차를_이동_조건에_따라_전진시킨다() {
         // given
-        Car pobi = new Car("pobi");
-        Car jason = new Car("jason");
         RacingGame racingGame = createRacingGameWithNumbers(
-                List.of(pobi, jason),
+                List.of(new Car("pobi"), new Car("jason")),
                 MOVE, STOP
         );
+        RoundResult expectedResult = round(snapshot("pobi", 1), snapshot("jason", 0));
 
         // when
-        racingGame.playRound();
+        RoundResult roundResult = racingGame.playRound();
 
         // then
-        assertThat(pobi.currentPosition()).isEqualTo(1);
-        assertThat(jason.currentPosition()).isZero();
+        assertThat(roundResult).isEqualTo(expectedResult);
     }
 
     @Test

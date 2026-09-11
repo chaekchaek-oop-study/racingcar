@@ -26,7 +26,7 @@ public class RacingGame {
     public GameResult play(int totalRound) {
         List<RoundResult> roundResults = new ArrayList<>();
         for (int round = 1; round <= totalRound; round++) {
-            RoundResult roundResult = playRoundV2();
+            RoundResult roundResult = playRound();
             roundResults.add(roundResult);
         }
 
@@ -37,16 +37,7 @@ public class RacingGame {
         return new GameResult(roundResults, winners);
     }
 
-    List<Car> findWinners() {
-        OptionalInt maxPosition = cars.findMaxPosition();
-        if (maxPosition.isEmpty()) {
-            return List.of();
-        }
-
-        return cars.atPosition(maxPosition.getAsInt());
-    }
-
-    RoundResult playRoundV2() {
+    RoundResult playRound() {
         List<CarSnapshot> snapshots = new ArrayList<>();
         for (Car car : cars.values()) {
             if (movingStrategy.canMove()) {
@@ -58,11 +49,12 @@ public class RacingGame {
         return new RoundResult(snapshots);
     }
 
-    void playRound() {
-        for (Car car : cars.values()) {
-            if (movingStrategy.canMove()) {
-                car.moveForward();
-            }
+    List<Car> findWinners() {
+        OptionalInt maxPosition = cars.findMaxPosition();
+        if (maxPosition.isEmpty()) {
+            return List.of();
         }
+
+        return cars.atPosition(maxPosition.getAsInt());
     }
 }
