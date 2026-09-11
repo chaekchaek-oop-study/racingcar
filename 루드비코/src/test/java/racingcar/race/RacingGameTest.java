@@ -1,6 +1,7 @@
 package racingcar.race;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static racingcar.car.CarFixture.createCarAt;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -23,6 +24,24 @@ class RacingGameTest {
         // then
         assertThat(pobi.currentPosition()).isEqualTo(1);
         assertThat(jason.currentPosition()).isZero();
+    }
+
+    @Test
+    void 우승자를_찾는다() {
+        RacingGame racingGame = createRacingGameWithNumbers(
+                List.of(
+                        createCarAt("pobi", 1),
+                        createCarAt("jason", 2),
+                        createCarAt("woni", 2)
+                )
+        );
+
+        assertThat(racingGame.findWinners())
+                .as("우승자가 둘이다")
+                .hasSize(2)
+                .extracting(Car::name)
+                .as("우승자는 jason과 woni이다")
+                .containsExactlyInAnyOrder("jason", "woni");
     }
 
     private static RacingGame createRacingGameWithNumbers(List<Car> cars, int... numbers) {

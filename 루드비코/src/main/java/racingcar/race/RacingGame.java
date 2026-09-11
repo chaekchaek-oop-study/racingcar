@@ -1,6 +1,7 @@
 package racingcar.race;
 
 import java.util.List;
+import java.util.OptionalInt;
 import racingcar.car.Car;
 import racingcar.car.Cars;
 import racingcar.move.MovingStrategy;
@@ -21,5 +22,14 @@ public class RacingGame {
                 car.moveForward();
             }
         }
+    }
+
+    public List<Car> findWinners() {
+        OptionalInt maxPosition = cars.findMaxPosition();
+        if (maxPosition.isEmpty()) {
+            return List.of();
+        }
+
+        return cars.atPosition(maxPosition.getAsInt());
     }
 }
