@@ -1,7 +1,6 @@
 package racingcar;
 
-import camp.nextstep.edu.missionutils.Console;
-import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 import racingcar.car.Car;
 import racingcar.move.MovingStrategy;
@@ -12,12 +11,12 @@ import racingcar.race.RoundCount;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
-        String names = Console.readLine();
-        String round = Console.readLine();
-        RacingGame racingGame = new RacingGame(Arrays.stream(names.split(",")).map(Car::new).toList(),
+        InputView inputView = new InputView();
+        List<String> carNames = inputView.readCarNames();
+        int roundCount = inputView.readRoundCount();
+        RacingGame racingGame = new RacingGame(carNames.stream().map(Car::new).toList(),
                 new MovingStrategy(new RandomNumberGenerator(0, 9)));
-        GameResult gameResult = racingGame.play(new RoundCount(Integer.parseInt(round)));
+        GameResult gameResult = racingGame.play(new RoundCount(roundCount));
 
         System.out.println("실행 결과");
         gameResult.rounds()
