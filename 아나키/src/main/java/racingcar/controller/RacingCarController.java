@@ -9,6 +9,9 @@ import racingcar.view.OutputView;
 
 public class RacingCarController {
 
+    private static final String CAR_NAME_SPLITER = ",";
+    private static final int CAR_NAME_LENGTH = 5;
+
     private final InputView inputView;
     private final OutputView outputView;
     private final RacingCarService carService;
@@ -40,7 +43,7 @@ public class RacingCarController {
     }
 
     private List<String> getCarName(String inputCarNames) {
-        List<String> carNames =  Arrays.stream(inputCarNames.split(","))
+        List<String> carNames =  Arrays.stream(inputCarNames.split(CAR_NAME_SPLITER))
                 .map(String::trim)
                 .toList();
 
@@ -49,7 +52,7 @@ public class RacingCarController {
                 throw new IllegalArgumentException("자동차 이름은 공백일 수 없습니다.");
             }
 
-            if (carName.length() > 5) {
+            if (carName.length() > CAR_NAME_LENGTH) {
                 throw new IllegalArgumentException("자동차 이름은 5자 이하여야 합니다.");
             }
         }
