@@ -14,6 +14,9 @@ import racingcar.move.NumberGenerator;
 
 class RacingGameTest {
 
+    public static final int MOVE = 4;
+    public static final int STOP = 3;
+
     @DisplayName("참가자는 최소 2명이어야 한다")
     @Test
     void 참가자가_2명보다_적으면_예외가_발생한다() {
@@ -27,7 +30,10 @@ class RacingGameTest {
         // given
         Car pobi = new Car("pobi");
         Car jason = new Car("jason");
-        RacingGame racingGame = createRacingGameWithNumbers(List.of(pobi, jason), 4, 3);
+        RacingGame racingGame = createRacingGameWithNumbers(
+                List.of(pobi, jason),
+                MOVE, STOP
+        );
 
         // when
         racingGame.playRound();
