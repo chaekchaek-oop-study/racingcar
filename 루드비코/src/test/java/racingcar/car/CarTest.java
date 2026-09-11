@@ -1,6 +1,7 @@
 package racingcar.car;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static racingcar.car.CarFixture.createCarWithDefaultName;
 
 import org.junit.jupiter.api.Test;
 
@@ -28,9 +29,5 @@ class CarTest {
         car.moveForward();
 
         assertThat(car.currentPosition()).isEqualTo(beforeMoving + 1);
-    }
-
-    private static Car createCarWithDefaultName() {
-        return new Car("pobi");
     }
 }

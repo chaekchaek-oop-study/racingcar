@@ -1,6 +1,8 @@
 package racingcar.car;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static racingcar.car.CarFixture.createCarAt;
+import static racingcar.car.CarFixture.createEmptyCars;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -63,18 +65,5 @@ class CarsTest {
 
             assertThat(cars.findMaxPosition()).isEmpty();
         }
-    }
-
-    private static Cars createEmptyCars() {
-        return Cars.of();
-    }
-
-    private static Car createCarAt(String name, int position) {
-        Car car = new Car(name);
-        for (int i = 0; i < position; i++) {
-            car.moveForward();
-        }
-
-        return car;
     }
 }
