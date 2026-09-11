@@ -21,14 +21,6 @@ public class RacingGame {
         this.movingStrategy = movingStrategy;
     }
 
-    public void playRound() {
-        for (Car car : cars.values()) {
-            if (movingStrategy.canMove()) {
-                car.moveForward();
-            }
-        }
-    }
-
     public List<Car> findWinners() {
         OptionalInt maxPosition = cars.findMaxPosition();
         if (maxPosition.isEmpty()) {
@@ -36,5 +28,13 @@ public class RacingGame {
         }
 
         return cars.atPosition(maxPosition.getAsInt());
+    }
+
+    void playRound() {
+        for (Car car : cars.values()) {
+            if (movingStrategy.canMove()) {
+                car.moveForward();
+            }
+        }
     }
 }
