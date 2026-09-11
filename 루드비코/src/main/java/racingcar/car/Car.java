@@ -14,6 +14,11 @@ public class Car {
         position = position.increase();
     }
 
+    public boolean isAt(int position) {
+        return this.position
+                .equals(new Position(position));
+    }
+
     public int currentPosition() {
         return position.value();
     }

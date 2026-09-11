@@ -27,6 +27,12 @@ public class Cars {
                 .max();
     }
 
+    public List<Car> atPosition(int position) {
+        return internalList.stream()
+                .filter(car -> car.isAt(position))
+                .toList();
+    }
+
     public List<Car> values() {
         return List.copyOf(internalList);
     }
