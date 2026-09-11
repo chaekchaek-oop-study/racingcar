@@ -23,9 +23,9 @@ public class RacingGame {
         this.movingStrategy = movingStrategy;
     }
 
-    public GameResult play(int totalRound) {
+    public GameResult play(RoundCount totalRound) {
         List<RoundResult> roundResults = new ArrayList<>();
-        for (int round = 1; round <= totalRound; round++) {
+        for (int round = 1; round <= totalRound.value(); round++) {
             RoundResult roundResult = playRound();
             roundResults.add(roundResult);
         }

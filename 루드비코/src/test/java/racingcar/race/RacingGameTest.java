@@ -77,7 +77,7 @@ class RacingGameTest {
                 List.of("pobi")
         );
 
-        GameResult gameResult = racingGame.play(3);
+        GameResult gameResult = racingGame.play(new RoundCount(3));
 
         assertThat(gameResult).isEqualTo(expectedResult);
     }
