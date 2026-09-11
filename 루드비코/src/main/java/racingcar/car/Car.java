@@ -26,4 +26,8 @@ public class Car {
     public String name() {
         return name.value();
     }
+
+    public CarSnapshot snapshot() {
+        return new CarSnapshot(name(), currentPosition());
+    }
 }

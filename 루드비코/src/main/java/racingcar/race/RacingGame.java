@@ -1,8 +1,10 @@
 package racingcar.race;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalInt;
 import racingcar.car.Car;
+import racingcar.car.CarSnapshot;
 import racingcar.car.Cars;
 import racingcar.move.MovingStrategy;
 
@@ -21,13 +23,39 @@ public class RacingGame {
         this.movingStrategy = movingStrategy;
     }
 
-    public List<Car> findWinners() {
+    public GameResult play(int totalRound) {
+        List<RoundResult> roundResults = new ArrayList<>();
+        for (int round = 1; round <= totalRound; round++) {
+            RoundResult roundResult = playRoundV2();
+            roundResults.add(roundResult);
+        }
+
+        List<String> winners = findWinners().stream()
+                .map(Car::name)
+                .toList();
+
+        return new GameResult(roundResults, winners);
+    }
+
+    List<Car> findWinners() {
         OptionalInt maxPosition = cars.findMaxPosition();
         if (maxPosition.isEmpty()) {
             return List.of();
         }
 
         return cars.atPosition(maxPosition.getAsInt());
+    }
+
+    RoundResult playRoundV2() {
+        List<CarSnapshot> snapshots = new ArrayList<>();
+        for (Car car : cars.values()) {
+            if (movingStrategy.canMove()) {
+                car.moveForward();
+            }
+            snapshots.add(car.snapshot());
+        }
+
+        return new RoundResult(snapshots);
     }
 
     void playRound() {

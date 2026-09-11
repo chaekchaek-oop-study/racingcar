@@ -5,10 +5,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static racingcar.car.CarFixture.createCarAt;
 import static racingcar.car.CarFixture.createCarWithDefaultName;
 
+import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import racingcar.car.Car;
+import racingcar.car.CarSnapshot;
 import racingcar.move.MovingStrategy;
 import racingcar.move.NumberGenerator;
 
@@ -59,6 +61,29 @@ class RacingGameTest {
                 .containsExactlyInAnyOrder("jason", "woni");
     }
 
+    @Test
+    void 게임을_진행한다() {
+        RacingGame racingGame = createRacingGameWithNumbers(
+                List.of(new Car("pobi"), new Car("jason"), new Car("woni")),
+                MOVE, MOVE, MOVE,
+                MOVE, MOVE, STOP,
+                MOVE, STOP, STOP
+        );
+
+        GameResult expectedResult = new GameResult(
+                List.of(
+                        round(snapshot("pobi", 1), snapshot("jason", 1), snapshot("woni", 1)),
+                        round(snapshot("pobi", 2), snapshot("jason", 2), snapshot("woni", 1)),
+                        round(snapshot("pobi", 3), snapshot("jason", 2), snapshot("woni", 1))
+                ),
+                List.of("pobi")
+        );
+
+        GameResult gameResult = racingGame.play(3);
+
+        assertThat(gameResult).isEqualTo(expectedResult);
+    }
+
     /**
      * {@link RacingGame#playRound} 가 필요하지 않은 테스트에서 사용한다.
      */
@@ -70,6 +95,14 @@ class RacingGameTest {
         NumberGenerator numberGenerator = new SequenceNumberGenerator(numbers);
         MovingStrategy movingStrategy = new MovingStrategy(numberGenerator);
         return new RacingGame(cars, movingStrategy);
+    }
+
+    private static RoundResult round(CarSnapshot... snapshots) {
+        return new RoundResult(Arrays.asList(snapshots));
+    }
+
+    private static CarSnapshot snapshot(String name, int position) {
+        return new CarSnapshot(name, position);
     }
 
     private static class SequenceNumberGenerator implements NumberGenerator {
