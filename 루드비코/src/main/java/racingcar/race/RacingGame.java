@@ -8,10 +8,15 @@ import racingcar.move.MovingStrategy;
 
 public class RacingGame {
 
+    private static final int MIN_PARTICIPANT_SIZE = 2;
+
     private final Cars cars;
     private final MovingStrategy movingStrategy;
 
     public RacingGame(List<Car> cars, MovingStrategy movingStrategy) {
+        if (cars.size() < MIN_PARTICIPANT_SIZE) {
+            throw new IllegalArgumentException("게임 참가자는 최소 " + MIN_PARTICIPANT_SIZE + "명이어야 합니다.");
+        }
         this.cars = Cars.of(cars.toArray(Car[]::new));
         this.movingStrategy = movingStrategy;
     }
